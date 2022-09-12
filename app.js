@@ -22,6 +22,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// Rutas para REST API
+app.get('/', (req, res) => {
+  return res.send('Received a GET HTTP method');
+});
+
+app.post('/', (req, res) => {
+  return res.send('Received a POST HTPP method');
+});
+
+app.put('/', (req, res) => {
+  return res.send('Received a PUT HTTP method');
+});
+
+app.delete('/', (req, res) => {
+  return res.render('Received a DELETE HTTP method');
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
