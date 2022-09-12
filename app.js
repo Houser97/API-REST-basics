@@ -23,20 +23,20 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // Rutas para REST API
-app.get('/', (req, res) => {
-  return res.send('Received a GET HTTP method');
+app.get('/user', (req, res) => {
+  return res.send('GET HTTP method on user resource');
 });
 
-app.post('/', (req, res) => {
-  return res.send('Received a POST HTPP method');
+app.post('/user', (req, res) => {
+  return res.send('POST HTPP method on user resource');
 });
 
-app.put('/', (req, res) => {
-  return res.send('Received a PUT HTTP method');
+app.put('/user/:userId', (req, res) => {
+  return res.send(`PUT HTTP method on ${req.params.userId} resource`);
 });
 
-app.delete('/', (req, res) => {
-  return res.render('Received a DELETE HTTP method');
+app.delete('/user/:userId', (req, res) => {
+  return res.render(`DELETE HTTP method on ${req.params.userId} resource`);
 });
 
 
