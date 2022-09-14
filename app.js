@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let uuid = require('uuid');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -15,7 +16,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -62,6 +63,19 @@ app.get('/messages', (req, res) => {
 
 app.get('/messages/:messageId', (req, res) => {
   return res.send(messages[req.params.messageId]);
+})
+
+// Creación de mensajes
+app.post('/messages', (req, res) => {
+  const id = uuid.v4();
+  const message = {
+    id,
+    text: req.body.text,
+  }
+
+  messages[id] = message;
+
+  return res.send(message)
 })
 
 // catch 404 and forward to error handler
