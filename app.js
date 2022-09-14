@@ -48,26 +48,21 @@ let messages = {
 };
 
 // Rutas para REST API
-app.get('/user', (req, res) => {
+app.get('/users', (req, res) => {
   return res.send(Object.values(users));
 });
 
-app.get('/user/:userId', (req, res) => {
+app.get('/users/:userId', (req, res) => {
   return res.send(users[req.params.userId]);
 })
 
-app.post('/user', (req, res) => {
-  return res.send('POST HTPP method on user resource');
-});
+app.get('/messages', (req, res) => {
+  return res.send(Object.values(messages));
+})
 
-app.put('/user/:userId', (req, res) => {
-  return res.send(`PUT HTTP method on ${req.params.userId} resource`);
-});
-
-app.delete('/user/:userId', (req, res) => {
-  return res.render(`DELETE HTTP method on ${req.params.userId} resource`);
-});
-
+app.get('/messages/:messageId', (req, res) => {
+  return res.send(messages[req.params.messageId]);
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
