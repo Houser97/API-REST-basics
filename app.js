@@ -47,11 +47,14 @@ let messages = {
   },
 };
 
-
 // Rutas para REST API
 app.get('/user', (req, res) => {
-  return res.send('GET HTTP method on user resource');
+  return res.send(Object.values(users));
 });
+
+app.get('/user/:userId', (req, res) => {
+  return res.send(users[req.params.userId]);
+})
 
 app.post('/user', (req, res) => {
   return res.send('POST HTPP method on user resource');
