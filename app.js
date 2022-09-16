@@ -97,6 +97,21 @@ app.delete('/messages/:messageId', (req, res) => {
   return res.send(message);
 })
 
+// Actualización de mensajes
+app.put('/messages/:messageId', (req, res) => {
+  const {
+    [req.params.messageId]: message,
+    ...otherMessages
+  } = messages;
+
+  message.text = req.body.text
+
+  messages = otherMessages;
+  messages[message.id] = message;
+
+  return res.send(messages[message.id])
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
