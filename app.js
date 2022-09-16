@@ -48,6 +48,12 @@ let messages = {
   },
 };
 
+// Creación de Middleware
+app.use((req, res, next) => {
+  req.me = users[1];
+  next();
+})
+
 // Rutas para REST API
 app.get('/users', (req, res) => {
   return res.send(Object.values(users));
@@ -71,6 +77,7 @@ app.post('/messages', (req, res) => {
   const message = {
     id,
     text: req.body.text,
+    userId: req.me.id
   }
 
   messages[id] = message;
