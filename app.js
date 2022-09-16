@@ -112,6 +112,11 @@ app.put('/messages/:messageId', (req, res) => {
   return res.send(messages[message.id])
 })
 
+// Crear ruta dedidaca al usuario pseudo autenticado
+app.get('/session', (req, res) => {
+  return res.send(users[req.me.id])
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
