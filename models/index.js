@@ -1,3 +1,5 @@
+let express = require('express');
+
 let users = {
     1: {
         id: '1',
@@ -22,7 +24,9 @@ let messages = {
     },
 };
 
-export default {
+let result = {
     users,
-    messages
+    messages,
 }
+
+module.exports = result;

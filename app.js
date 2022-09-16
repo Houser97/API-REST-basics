@@ -7,8 +7,10 @@ let uuid = require('uuid');
 let models = require('./models/index');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-let routes = require('./routes')
+
+let session = require('./routes/session');
+let user = require('./routes/user');
+let message = require('./routes/message');
 
 var app = express();
 
@@ -30,10 +32,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/session', routes.session);
-app.use('/users', routes.user);
-app.use('/messages', routes.message);
+app.use('/session', session);
+app.use('/users', user);
+app.use('/messages', message);
 
 // Creación de Middleware
 app.use((req, res, next) => {

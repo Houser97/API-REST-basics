@@ -46,3 +46,5 @@ router.put('/:messageId', (req, res) => {
   
     return res.send(req.context.models.messages[message.id])
 })
+
+module.exports = router;
