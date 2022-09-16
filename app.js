@@ -39,19 +39,19 @@ app.use((req, res, next) => {
 
 // Rutas para REST API
 app.get('/users', (req, res) => {
-  return res.send(Object.values(users));
+  return res.send(Object.values(req.context.models.users));
 });
 
 app.get('/users/:userId', (req, res) => {
-  return res.send(users[req.params.userId]);
+  return res.send(req.context.models.users[req.params.userId]);
 })
 
 app.get('/messages', (req, res) => {
-  return res.send(Object.values(messages));
+  return res.send(Object.values(req.context.models.messages));
 })
 
 app.get('/messages/:messageId', (req, res) => {
-  return res.send(messages[req.params.messageId]);
+  return res.send(req.context.models.messages[req.params.messageId]);
 })
 
 // Creación de mensajes
@@ -60,10 +60,10 @@ app.post('/messages', (req, res) => {
   const message = {
     id,
     text: req.body.text,
-    userId: req.me.id
+    userId: req.context.me.id
   }
 
-  messages[id] = message;
+  req.context.models.messages[id] = message;
 
   return res.send(message)
 })
@@ -73,9 +73,9 @@ app.delete('/messages/:messageId', (req, res) => {
   const {
     [req.params.messageId]: message,
     ...otherMessages
-  } = messages;
+  } = req.context.models.messages;
 
-  messages = otherMessages;
+  req.context.models.messages = otherMessages;
 
   return res.send(message);
 })
@@ -85,19 +85,19 @@ app.put('/messages/:messageId', (req, res) => {
   const {
     [req.params.messageId]: message,
     ...otherMessages
-  } = messages;
+  } = req.context.models.messages;
 
   message.text = req.body.text
 
-  messages = otherMessages;
-  messages[message.id] = message;
+  req.context.models.messages = otherMessages;
+  req.context.models.messages[message.id] = message;
 
-  return res.send(messages[message.id])
+  return res.send(req.context.models.messages[message.id])
 })
 
 // Crear ruta dedidaca al usuario pseudo autenticado
 app.get('/session', (req, res) => {
-  return res.send(users[req.me.id])
+  return res.send(req.context.models.users[req.context.me.id])
 })
 
 // catch 404 and forward to error handler
