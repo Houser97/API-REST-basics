@@ -8,6 +8,7 @@ let models = require('./models/index');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+let routes = require('./routes')
 
 var app = express();
 
@@ -30,6 +31,9 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/session', routes.session);
+app.use('/users', routes.user);
+app.use('/messages', routes.message);
 
 // Creación de Middleware
 app.use((req, res, next) => {
