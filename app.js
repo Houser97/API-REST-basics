@@ -23,31 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// Datos a enviar
-let users = {
-  1: {
-    id: '1',
-    username: 'Robin Wieruch',
-  },
-  2: {
-    id: '2',
-    username: 'Dave Davids',
-  },
-};
-
-let messages = {
-  1:{
-    id: '1',
-    text: 'Hellor World',
-    userId: '1',
-  },
-  2: {
-    id: '2',
-    text: 'By World',
-    userId: '2',
-  },
-};
-
 // Creación de Middleware
 app.use((req, res, next) => {
   req.me = users[1];
